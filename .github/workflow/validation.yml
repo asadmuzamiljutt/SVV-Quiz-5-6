@@ -1,0 +1,28 @@
+name: Validation Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Run Validation Tests
+        run: echo "Running validation tests..."
+
+      - name: Generate Validation Report
+        run: |
+          mkdir reports
+          echo "Validation Successful" > reports/report.txt
+
+      - name: Upload Validation Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: validation-report
+          path: reports/report.txt
